@@ -17,8 +17,11 @@ app = Flask(__name__)
 CORS(app)
 
 # Load dataset 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "data", "spam2.csv")
+
 chunksize = 10000
-df_iter = pd.read_csv("/home/vidya/main_backup/Desktop/email-spam-identifier/data/spam2.csv", chunksize=chunksize)
+df_iter = pd.read_csv(csv_path, chunksize=chunksize)
 df = pd.concat(df_iter)
 df = df[['text', 'label_num']]
 print(df.shape)
